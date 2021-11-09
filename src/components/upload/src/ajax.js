@@ -76,7 +76,10 @@ export default function upload(option) {
   const headers = option.headers || {};
 
   for (let item in headers) {
-    if (headers.hasOwnProperty(item) && headers[item] !== null) {
+    if (
+      Object.prototype.hasOwnProperty.call(headers, item) &&
+      headers[item] !== null
+    ) {
       xhr.setRequestHeader(item, headers[item]);
     }
   }

@@ -1,10 +1,17 @@
-import Progress from "./components/progress/index.js";
-import Audio from "./components/audio/index.js";
-import Video from "./components/video/index.js";
-import Upload from "./components/upload/index.js";
-import Divider from "./components/divider/index.js";
-import ColorPicker from "./components/colorPicker/index.js";
-const components = [Progress, Audio, Video, Upload, Divider, ColorPicker];
+import kidsProgress from "./components/progress/index.js";
+import kidsAudio from "./components/audio/index.js";
+import kidsVideo from "./components/video/index.js";
+import kidsUpload from "./components/upload/index.js";
+import kidsDivider from "./components/divider/index.js";
+import kidsColorPicker from "./components/colorPicker/index.js";
+const components = [
+  kidsProgress,
+  kidsAudio,
+  kidsVideo,
+  kidsUpload,
+  kidsDivider,
+  kidsColorPicker,
+];
 
 const kidsUI = {
   install: function (Vue) {
@@ -14,5 +21,12 @@ const kidsUI = {
   },
 };
 
-export { Progress, Video, Upload, Audio, Divider, ColorPicker };
+export {
+  kidsProgress,
+  kidsAudio,
+  kidsVideo,
+  kidsUpload,
+  kidsDivider,
+  kidsColorPicker,
+};
 export default kidsUI;

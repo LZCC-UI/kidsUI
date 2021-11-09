@@ -1,4 +1,4 @@
-const generateMethods = function() {
+const generateMethods = function () {
   return {
     methods: {
       // 拖拽 切换进度
