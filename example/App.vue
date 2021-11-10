@@ -1,9 +1,11 @@
 <template>
-  <kidsDivider />
+  <div id="app">
+    <kidsDivider></kidsDivider>
+  </div>
 </template>
 
 <script>
-import { kidsDivider } from "@/index.js";
+import kidsDivider from "@/components/divider/src/main.vue";
 
 export default {
   name: "App",

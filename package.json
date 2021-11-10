@@ -1,40 +1,43 @@
 {
-	"name": "kids-ui",
+	"name": "@llzc/kids",
 	"version": "0.1.0",
-	"private": true,
-	"main": "./dist/kids-ui.common.js",
+	"private": false,
+	"main": "/lib/kids.common.js",
+	"files": [
+		"lib/*",
+		"src/*"
+	],
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
-		"build-bundle": "vue-cli-service build --target lib --name kids-ui ./src/index.js",
-		"test": "vue-cli-service test:unit",
+		"build-bundle": "vue-cli-service build --target lib --name kids --dest lib ./src/index.js",
+		"test:unit": "vue-cli-service test:unit",
 		"lint": "vue-cli-service lint",
-		"lint:fix": "vue-cli-service lint --fix"
+		"prepare": "husky install"
 	},
 	"dependencies": {
-		"colorthief": "^2.3.2",
 		"core-js": "^3.6.5",
-		"lodash": "^4.17.21",
-		"tinycolor2": "^1.4.2",
-		"vue": "^3.0.0"
+		"vue": "^2.6.11"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^14.1.0",
+		"@commitlint/config-conventional": "^14.1.0",
 		"@vue/cli-plugin-babel": "~4.5.0",
 		"@vue/cli-plugin-eslint": "~4.5.0",
 		"@vue/cli-plugin-unit-jest": "~4.5.0",
 		"@vue/cli-service": "~4.5.0",
-		"@vue/compiler-sfc": "^3.0.0",
 		"@vue/eslint-config-prettier": "^6.0.0",
-		"@vue/test-utils": "^2.0.0-0",
+		"@vue/test-utils": "^1.0.3",
 		"babel-eslint": "^10.1.0",
 		"eslint": "^6.7.2",
 		"eslint-plugin-prettier": "^3.3.1",
-		"eslint-plugin-vue": "^7.0.0",
+		"eslint-plugin-vue": "^6.2.2",
+		"husky": "^7.0.4",
+		"lint-staged": "^11.2.6",
 		"node-sass": "5.0.0",
 		"prettier": "^2.2.1",
 		"sass-loader": "10.1.1",
-		"typescript": "~3.9.3",
-		"vue-jest": "^5.0.0-0"
+		"vue-template-compiler": "^2.6.11"
 	},
 	"eslintConfig": {
 		"root": true,
@@ -42,7 +45,7 @@
 			"node": true
 		},
 		"extends": [
-			"plugin:vue/vue3-essential",
+			"plugin:vue/essential",
 			"eslint:recommended",
 			"@vue/prettier"
 		],
@@ -62,15 +65,15 @@
 			}
 		]
 	},
+	"lint-staged": {
+		"*.{js,ts}": "eslint --fix"
+	},
 	"browserslist": [
 		"> 1%",
 		"last 2 versions",
 		"not dead"
 	],
 	"jest": {
-		"preset": "@vue/cli-plugin-unit-jest",
-		"transform": {
-			"^.+\\.vue$": "vue-jest"
-		}
+		"preset": "@vue/cli-plugin-unit-jest"
 	}
 }

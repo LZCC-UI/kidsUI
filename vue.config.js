@@ -11,7 +11,7 @@ module.exports = {
     },
   },
   css: {
-    extract: true, // 是否单独抽离css
+    extract: false, // 是否单独抽离css
   },
 
   configureWebpack: {
