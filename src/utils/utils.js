@@ -7,7 +7,8 @@ export function isPC() {
 // }
 export function timeToString(param) {
   param = parseInt(param);
-  let mm = "",
+  let hh = "",
+    mm = "",
     ss = "";
   if (param >= 0 && param < 60) {
     param < 10 ? (ss = "0" + param) : (ss = param);
@@ -19,5 +20,10 @@ export function timeToString(param) {
       ? (ss = "0" + String(param - parseInt(mm * 60)))
       : (ss = param - parseInt(mm * 60));
     return mm + ":" + ss;
+  } else {
+    hh = parseInt(param / 3600);
+
+    let leave = param - parseInt(hh * 3600);
+    return hh + ":" + timeToString(leave);
   }
 }

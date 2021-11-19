@@ -9,8 +9,8 @@
       <div class="kids-palette-container">
         <div
           class="swatch"
-          v-for="item of colors"
-          :key="item"
+          v-for="(item, index) of colors"
+          :key="index"
           :style="item"
         ></div>
       </div>
@@ -29,7 +29,6 @@ export default {
   computed: {
     colors() {
       let color = [];
-      console.log("colorList", this.colorList);
       for (let item of this.colorList) {
         let temp = {
           backgroundColor: `rgb(${item.join(",")})`,
@@ -45,15 +44,12 @@ export default {
 <style lang="scss" scoped>
 .kids-domainColorList {
   position: relative;
-  display: flex;
-  justify-content: space-between;
+  .kids-domianColor {
+    text-align: left;
+  }
   .kids-palette {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-left: 30px;
+    text-align: left;
+
     .kids-palette-container {
       display: flex;
       div {

@@ -1,17 +1,18 @@
 <template>
-  <div class="kids-upload-container" @click="handleClick">
-    <input
-      type="file"
-      class="kids-upload__input"
-      ref="input"
-      :accept="accept"
-      @change="handleChange"
-    />
-    <img :src="imgUrl" id="image" v-show="imgUrl" alt="" />
-    <slot v-if="!imgUrl"></slot>
+  <div>
+    <div class="kids-upload-container" @click="handleClick">
+      <input
+        type="file"
+        class="kids-upload__input"
+        ref="input"
+        :accept="accept"
+        @change="handleChange"
+      />
+      <slot></slot>
+    </div>
+    <DomainColor :colorList="colorList" v-if="colorList.length" />
+    <!-- <input type="color" /> -->
   </div>
-  <DomainColor :colorList="colorList" v-if="colorList.length" />
-  <input type="color" />
 </template>
 
 <script>
@@ -27,6 +28,10 @@ export default {
     pickColor: {
       type: Boolean,
       default: false,
+    },
+    httpRequest: {
+      type: Function,
+      require: true,
     },
   },
   data() {
@@ -62,20 +67,15 @@ export default {
         if (this.pickColor) {
           this.getColor();
         }
+        this.$emit("update:value", this.imgUrl);
+        this.httpRequest(this.imgUrl);
       };
-      //   postFiles.forEach((rawFile) => {
-      //     // this.onStart(rawFile);
-      //     const { uid } = rawFile;
-      //     console.log(uid);
-      //     // if (this.autoUpload) this.upload(rawFile);
-      //   });
     },
     getColor() {
       const colorThief = new ColorThief();
       const img = new Image();
       img.addEventListener("load", () => {
         this.colorList = colorThief.getPalette(img, 5);
-        console.log(this.colorList);
       });
       img.crossOrigin = "Anonymous";
       img.src = this.imgUrl;
@@ -93,6 +93,9 @@ export default {
   height: 6.6rem;
   border: 1px dashed black;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
     width: 100%;
     height: 100%;
