@@ -18,12 +18,7 @@
             {{ content }}
           </div>
 
-          <div
-            class="kids-progress_dragable"
-            :style="dragableStyle"
-            v-if="dragable"
-            @click.stop
-          ></div>
+          <div class="kids-progress_dragable" v-if="dragable" @click.stop></div>
         </div>
       </div>
     </div>
@@ -272,8 +267,9 @@ export default {
           display: inline-block;
           vertical-align: middle;
           transform-origin: left;
-          background-image: url(../assets/icon.png);
-          background-size: 100% 100%;
+          background-color: red;
+          border-radius: 50%;
+          box-sizing: border-box;
         }
       }
     }

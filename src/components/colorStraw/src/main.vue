@@ -59,7 +59,14 @@ export default {
         });
       } else {
         if (res) {
-          this.initStraw();
+          this.$nextTick(() => {
+            if (this.targetEl.tagName != "IMG") {
+              console.log("取色元素须为image元素！");
+            } else {
+              this.targetEl.crossOrigin = "";
+              this.initStraw();
+            }
+          });
         }
       }
     },
@@ -212,7 +219,6 @@ export default {
         Math.PI * 2,
         false
       );
-
       this.contextRef.clip();
 
       this.contextRef.drawImage(
@@ -241,49 +247,7 @@ export default {
       );
       this.contextRef.clip();
       this.drawGrid();
-      //   this.fillGridColor();
-      //   this.contextRef.restore();
-      //   填充颜色
-      //   this.contextRef.save();
-      //   this.contextRef.beginPath();
-      //   this.contextRef.arc(
-      //     this.centerPoint.x,
-      //     this.centerPoint.y,
-      //     this.originalRadius,
-      //     0,
-      //     Math.PI * 2,
-      //     false
-      //   );
-      //   this.contextRef.clip();
-      //   this.fillGridColor();
-
       this.contextRef.restore();
-
-      //   this.contextRef.beginPath();
-      //   var gradient = this.contextRef.createRadialGradient(
-      //     this.centerPoint.x + 50,
-      //     this.centerPoint.y + 50,
-      //     this.originalRadius - 2,
-      //     this.centerPoint.x,
-      //     this.centerPoint.y,
-      //     this.originalRadius
-      //   );
-      //   gradient.addColorStop(0, "rgba(0,0,0,0.2)");
-      //   gradient.addColorStop(0.8, "silver");
-      //   gradient.addColorStop(0.9, "silver");
-      //   gradient.addColorStop(1.0, "rgba(150,150,150,0.9)");
-
-      //   this.contextRef.strokeStyle = gradient;
-      //   this.contextRef.lineWidth = 2;
-      //   this.contextRef.arc(
-      //     this.centerPoint.x + 50,
-      //     this.centerPoint.y + 50,
-      //     this.originalRadius,
-      //     0,
-      //     Math.PI * 2,
-      //     false
-      //   );
-      //   this.contextRef.stroke();
     },
     // 绘制网格
     drawGrid(stepX = 10, stepY = 10, lineWidth = 1) {
@@ -402,5 +366,6 @@ export default {
 <style lang="scss" scoped>
 .icon {
   max-width: 30px;
+  cursor: pointer;
 }
 </style>

@@ -103,7 +103,14 @@ export default {
       required: true,
       type: Object,
       default: () => {
-        return {};
+        return {
+          url: "https://music.163.com/song/media/outer/url?id=1347524822.mp3",
+          mode: "line",
+          poster: "https://kids.nosdn.127.net/kids/test/1629960371359.jpg",
+          currentTime: 0,
+          strokeWidth: 1,
+          name: "辞.九门回忆",
+        };
       },
     },
   },
@@ -184,6 +191,10 @@ export default {
       height: 38px;
       width: 38px;
       margin-right: 0.4rem;
+      img {
+        width: 100%;
+        height: 100%;
+      }
       .mask {
         position: absolute;
         top: 0;

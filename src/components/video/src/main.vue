@@ -59,7 +59,7 @@
         <kidsProgress
           class="kids-video-progress"
           :strokeWidth="
-            (options.controller && options.controller.strokeWidth) || 0.1
+            (options.controller && options.controller.strokeWidth) || 1
           "
           :percent="percentage"
           @updatePercent="updatePercent"
@@ -115,7 +115,7 @@ export default {
           muted: false,
           backgroundColor: "white",
           controller: {
-            strokeWidth: 0.8,
+            strokeWidth: 4,
             voice: true,
             fullScreen: true,
             timeDivider: true,
@@ -443,7 +443,7 @@ export default {
         top: 0;
         left: 0;
         display: block;
-        line-height: 20px;
+        // line-height: 20px;
         transform-origin: left 5px;
       }
     }

@@ -4,6 +4,10 @@
       <div class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
+            <div class="closeTag" @click="closePopup">
+              <div></div>
+              <div></div>
+            </div>
             <div class="modal-header">
               <slot name="header"></slot>
             </div>
@@ -36,6 +40,11 @@ export default {
       default: false,
     },
   },
+  methods: {
+    closePopup() {
+      this.$emit("updateVisible", false);
+    },
+  },
 };
 </script>
 
@@ -61,11 +70,30 @@ export default {
   width: 300px;
   margin: 0px auto;
   padding: 20px 30px;
+  position: relative;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
+  .closeTag {
+    cursor: pointer;
+    div {
+      height: 2px;
+      width: 18px;
+      background: black;
+      display: block;
+      position: absolute;
+      right: 10px;
+      top: 15px;
+    }
+    div:first-of-type {
+      transform: rotate(45deg);
+    }
+    div:nth-of-type(2) {
+      transform: rotate(-45deg);
+    }
+  }
 }
 
 .modal-header h3 {
@@ -75,6 +103,8 @@ export default {
 
 .modal-body {
   margin: 20px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .modal-enter {
