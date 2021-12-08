@@ -8,11 +8,7 @@
     }"
   >
     <div class="kids-progress-bar" :style="{ padding: strokeWidth + 'px 0' }">
-      <div
-        class="kids-progress_outer"
-        ref="_outer"
-        :style="{ height: strokeWidth + 'px' }"
-      >
+      <div class="kids-progress_outer" ref="_outer" :style="bgStyle">
         <div class="kids-progress_inner" :style="barStyle">
           <div class="kids-progress_innerText" v-if="showText && textInside">
             {{ content }}
@@ -33,7 +29,7 @@
 </template>
 
 <script>
-import { isPC } from "@/utils/utils";
+import utils from "../../../../utils/index.js";
 import pcDrag from "./mixins/pcDrag";
 import mobileTouch from "./mixins/mobileTouch";
 export default {
@@ -48,9 +44,13 @@ export default {
       type: [String, Array, Function],
       default: "",
     },
+    bgColor: {
+      type: [String, Function],
+      default: "",
+    },
     strokeWidth: {
       type: Number,
-      default: 6,
+      default: 1,
     },
     textInside: {
       type: Boolean,
@@ -92,16 +92,31 @@ export default {
   computed: {
     dragableStyle() {
       const style = {};
-      style.width = this.strokeWidth * 4 + "px";
-      style.height = this.strokeWidth * 4 + "px";
-      let trans = -(this.strokeWidth * 3) / 2;
-      style.transform = `translate(${trans}px, ${trans - 0.5}px)`;
+      style.width = this.strokeWidth * 2 + "rem";
+      style.height = this.strokeWidth * 2 + "rem";
+      style.border = this.strokeWidth / 1.5 + "rem solid white";
+      let trans = -this.strokeWidth;
+      style.transform = `translate(${trans}rem, ${trans / 2}rem)`;
       return style;
     },
     barStyle() {
       const style = {};
       style.width = this.percentage + "%";
       style.backgroundColor = this.getCurrentColor(this.percentage);
+      style.backgroundImage = this.getCurrentColor(this.percentage);
+      return style;
+    },
+    bgStyle() {
+      const style = {};
+      style.height = this.strokeWidth + "px";
+      let realColor;
+      if (typeof this.bgColor === "function") {
+        realColor = this.bgColor();
+      } else {
+        realColor = this.bgColor;
+      }
+      style.backgroundColor = realColor;
+      style.backgroundImage = realColor;
       return style;
     },
     content() {
@@ -132,9 +147,8 @@ export default {
   methods: {
     // 初始化
     initEvent() {
-      console.log("initEvent");
       let el = this.$el;
-      if (isPC()) {
+      if (utils.isPC()) {
         el.addEventListener(
           "mousedown",
           this.mousedownHandler.bind(this),
@@ -227,14 +241,15 @@ export default {
   position: relative;
   line-height: 1;
   height: fit-content;
+  display: flex;
+  justify-content: flex-start;
   -webkit-tap-highlight-color: transparent;
   .kids-progress-bar {
     cursor: pointer;
-    width: 100%;
+    flex: 1;
     box-sizing: border-box;
     vertical-align: middle;
     padding-right: 50px;
-    margin-right: -55px;
     display: inline-block;
 
     .kids-progress_outer {
